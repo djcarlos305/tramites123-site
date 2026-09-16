@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tramites123.com/sitemap.xml
