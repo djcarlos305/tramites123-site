@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 330" role="img" aria-labelledby="title desc">
+  <title id="title">Trámites123</title><desc id="desc">Documento con sello de aprobación y el nombre Trámites123</desc>
+  <rect width="720" height="330" rx="26" fill="#fff"/>
+  <g transform="translate(266 18)"><path d="M24 24 133 4l46 38 19 109-138 25z" fill="#0871b4"/><path d="M48 16h96l39 39v112H48z" fill="#fff" stroke="#063b67" stroke-width="10"/><path d="M144 17v39h39" fill="none" stroke="#063b67" stroke-width="10"/><path d="M73 76h70M73 103h58M73 130h43" stroke="#9aa6ad" stroke-width="10" stroke-linecap="round"/><circle cx="171" cy="133" r="55" fill="#23933f"/><path d="m141 132 20 20 39-44" fill="none" stroke="#fff" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <text x="360" y="245" text-anchor="middle" font-family="Arial Black,Arial,sans-serif" font-size="92" font-weight="900" font-style="italic" fill="#063b67">Trámites<tspan fill="#23933f">123</tspan></text><path d="M73 274h574" stroke="#23933f" stroke-width="6"/><text x="360" y="309" text-anchor="middle" font-family="Arial,sans-serif" font-size="25" font-weight="700" letter-spacing="8" fill="#23933f">FÁCIL · CLARO · CONTIGO</text>
+</svg>
