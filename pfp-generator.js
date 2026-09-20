@@ -1,0 +1,18 @@
+(()=>{
+  const $=id=>document.getElementById(id),canvas=$('pfpCanvas'),ctx=canvas.getContext('2d');
+  const ui={file:$('photo'),zoom:$('zoom'),rotation:$('rotation'),shape:$('shape'),bg:$('background'),border:$('borderColor'),borderWidth:$('borderWidth'),brightness:$('brightness'),contrast:$('contrast'),saturation:$('saturation'),download:$('download'),reset:$('reset'),status:$('status')};
+  const copy=document.body.dataset.lang==='en'?{ready:'Photo loaded. Drag it in the preview to reposition it.',choose:'Choose a photo first.',saved:'Your 1080 × 1080 PNG is ready.',error:'That image could not be opened. Try JPG, PNG or WebP.'}:{ready:'Foto cargada. Arrástrala en la vista previa para acomodarla.',choose:'Primero elige una foto.',saved:'Tu PNG de 1080 × 1080 está listo.',error:'No se pudo abrir esa imagen. Prueba JPG, PNG o WebP.'};
+  const state={img:null,x:0,y:0,drag:false,lastX:0,lastY:0};canvas.width=canvas.height=1080;
+  const number=el=>Number(el.value);
+  function path(){ctx.beginPath();if(ui.shape.value==='circle')ctx.arc(540,540,518,0,Math.PI*2);else ctx.roundRect(22,22,1036,1036,72)}
+  function draw(){ctx.clearRect(0,0,1080,1080);ctx.save();path();ctx.clip();ctx.fillStyle=ui.bg.value;ctx.fillRect(0,0,1080,1080);if(state.img){const base=Math.max(1080/state.img.width,1080/state.img.height),scale=base*number(ui.zoom),w=state.img.width*scale,h=state.img.height*scale;ctx.save();ctx.translate(540+state.x,540+state.y);ctx.rotate(number(ui.rotation)*Math.PI/180);ctx.filter=`brightness(${number(ui.brightness)}%) contrast(${number(ui.contrast)}%) saturate(${number(ui.saturation)}%)`;ctx.drawImage(state.img,-w/2,-h/2,w,h);ctx.restore()}else{ctx.fillStyle='#dce8ef';ctx.fillRect(0,0,1080,1080);ctx.fillStyle='#668093';ctx.textAlign='center';ctx.font='700 48px system-ui';ctx.fillText('PFP',540,560)}ctx.restore();ctx.save();path();ctx.strokeStyle=ui.border.value;ctx.lineWidth=number(ui.borderWidth)*2;ctx.stroke();ctx.restore()}
+  function reset(){state.x=state.y=0;ui.zoom.value=1;ui.rotation.value=0;ui.brightness.value=ui.contrast.value=ui.saturation.value=100;ui.shape.value='circle';ui.bg.value='#ffffff';ui.border.value='#2ca248';ui.borderWidth.value=12;draw()}
+  ui.file.addEventListener('change',()=>{const file=ui.file.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{const img=new Image();img.onload=()=>{state.img=img;reset();ui.status.textContent=copy.ready};img.onerror=()=>ui.status.textContent=copy.error;img.src=reader.result};reader.readAsDataURL(file)});
+  ['zoom','rotation','shape','background','borderColor','borderWidth','brightness','contrast','saturation'].forEach(id=>$(id).addEventListener('input',draw));
+  function point(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*1080/r.width,y:(e.clientY-r.top)*1080/r.height}}
+  canvas.addEventListener('pointerdown',e=>{if(!state.img)return;const p=point(e);state.drag=true;state.lastX=p.x;state.lastY=p.y;canvas.setPointerCapture?.(e.pointerId);e.preventDefault()});
+  canvas.addEventListener('pointermove',e=>{if(!state.drag)return;const p=point(e);state.x+=p.x-state.lastX;state.y+=p.y-state.lastY;state.lastX=p.x;state.lastY=p.y;draw();e.preventDefault()});
+  ['pointerup','pointercancel'].forEach(type=>canvas.addEventListener(type,()=>state.drag=false));
+  ui.reset.addEventListener('click',()=>{reset();ui.status.textContent=''});
+  ui.download.addEventListener('click',()=>{if(!state.img){ui.status.textContent=copy.choose;ui.status.classList.add('error');return}ui.status.classList.remove('error');draw();const a=document.createElement('a');a.download='profile-picture-1080.png';a.href=canvas.toDataURL('image/png');a.click();ui.status.textContent=copy.saved});draw();
+})();
