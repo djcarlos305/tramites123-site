@@ -1,0 +1,12 @@
+/* Shared arithmetic for the five paired English/Spanish tools. Amounts are USD. */
+(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;root.TramitesCalculators=api;})(typeof globalThis!=='undefined'?globalThis:this,function(){
+ const money=n=>Math.round((n+Number.EPSILON)*100)/100;
+ const valid=(...xs)=>xs.every(x=>Number.isFinite(x)&&x>=0);
+ function dti(grossMonthly,debtMonthly,proposedHousing=0){if(!valid(grossMonthly,debtMonthly,proposedHousing)||grossMonthly<=0)throw Error('invalid');return {current:100*debtMonthly/grossMonthly,withHousing:100*(debtMonthly+proposedHousing)/grossMonthly};}
+ function payoff(balance,apr,payment){if(!valid(balance,apr,payment)||apr>1000||payment<=0)throw Error('invalid');let cents=Math.round(balance*100), paid=0, interest=0, months=0, p=Math.round(payment*100);if(balance>0&&p===0)throw Error('invalid');if(cents===0)return {months:0,interest:0,total:0};let rate=apr/1200;if(p<=Math.round(cents*rate))throw Error('tooSmall');while(cents>0&&months<1200){const fee=Math.round(cents*rate);const due=cents+fee;const transfer=Math.min(p,due);cents=due-transfer;paid+=transfer;interest+=fee;months++;}if(cents>0)throw Error('tooLong');return {months,interest:interest/100,total:paid/100};}
+ function rent(grossMonthly,monthlyDebts,percent=30){if(!valid(grossMonthly,monthlyDebts,percent)||percent>100)throw Error('invalid');return {limit:money(Math.max(0,grossMonthly*percent/100-monthlyDebts)),grossCap:money(grossMonthly*percent/100)};}
+ function paycheck(gross,pretax,withholding,posttax){if(!valid(gross,pretax,withholding,posttax)||pretax>gross||withholding+posttax>gross-pretax)throw Error('invalid');return {taxable:money(gross-pretax),net:money(gross-pretax-withholding-posttax)};}
+ function parseDate(s){if(!/^\d{4}-\d{2}-\d{2}$/.test(s))throw Error('invalid');const [y,m,d]=s.split('-').map(Number);const t=new Date(Date.UTC(y,m-1,d));if(t.getUTCFullYear()!==y||t.getUTCMonth()!==m-1||t.getUTCDate()!==d)throw Error('invalid');return t;}
+ function businessDay(start,days,holidays=[]){let date=parseDate(start);if(!Number.isInteger(days)||days<0||days>10000)throw Error('invalid');const skipped=new Set(holidays.filter(Boolean).map(s=>parseDate(s).toISOString().slice(0,10)));for(let n=0;n<days;){date.setUTCDate(date.getUTCDate()+1);const w=date.getUTCDay();if(w!==0&&w!==6&&!skipped.has(date.toISOString().slice(0,10)))n++;}return date.toISOString().slice(0,10);}
+ return {dti,payoff,rent,paycheck,businessDay};
+});
