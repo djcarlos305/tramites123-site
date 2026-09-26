@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Test de Velocidad de Escritura | WPM y Precisión | Trámites123</title>
+<meta name="description" content="Prueba gratis tu velocidad de escritura. Mide palabras por minuto, precisión, errores y caracteres con retos de 30 segundos, 1, 3 y 5 minutos.">
+<link rel="canonical" href="https://tramites123.com/herramientas/test-velocidad-escritura/">
+<link rel="alternate" hreflang="es" href="https://tramites123.com/herramientas/test-velocidad-escritura/">
+<link rel="alternate" hreflang="en" href="https://tramites123.com/tools/typing-speed-test/">
+<link rel="stylesheet" href="/herramientas/utilidades.css">
+<style>
+.typing-shell{max-width:980px;margin:0 auto 48px;background:#fff;border:1px solid #dfe5ea;border-radius:18px;padding:24px;box-shadow:0 14px 40px rgba(25,45,70,.08)}
+.controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px}
+.control label{display:block;font-weight:700;margin-bottom:6px}.control select{width:100%;padding:11px;border:1px solid #cfd8df;border-radius:10px;background:#fff}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:18px 0}
+.stat{background:#f4f8fb;border-radius:12px;padding:12px;text-align:center}.stat strong{display:block;font-size:1.45rem}.stat span{font-size:.78rem;color:#5f6d78}
+.sample{font-size:1.18rem;line-height:1.8;background:#f8fafc;border:1px solid #e4eaee;border-radius:14px;padding:20px;min-height:150px;white-space:pre-wrap}
+.sample .ok{color:#157347}.sample .bad{color:#b42318;background:#fee4e2;border-radius:2px}.sample .current{background:#fff3bf;border-radius:2px}
+textarea#typingInput{width:100%;min-height:150px;margin-top:16px;border:2px solid #cbd5df;border-radius:14px;padding:16px;font:inherit;font-size:1.05rem;resize:vertical}
+textarea#typingInput:focus{outline:none;border-color:#2878c8;box-shadow:0 0 0 3px rgba(40,120,200,.13)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.actions button{border:0;border-radius:10px;padding:12px 18px;font-weight:800;cursor:pointer}.primary{background:#1769aa;color:#fff}.secondary{background:#edf2f6;color:#23313d}
+.result-panel{display:none;margin-top:24px;padding:22px;border-radius:16px;background:#eef8f2;border:1px solid #c8e7d2}.result-panel.show{display:block}
+.result-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.result-box{background:#fff;border-radius:12px;padding:15px;text-align:center}.result-box strong{font-size:1.7rem;display:block}
+.grade{font-weight:800;font-size:1.15rem;margin:14px 0 0}.hint{color:#64727e;font-size:.9rem}.progress{height:8px;background:#e7edf2;border-radius:999px;overflow:hidden;margin-top:12px}.progress>div{height:100%;background:#1769aa;width:0}
+@media(max-width:720px){.controls{grid-template-columns:1fr 1fr}.stats{grid-template-columns:repeat(2,1fr)}.result-grid{grid-template-columns:1fr 1fr}.sample{font-size:1.05rem}.typing-shell{padding:16px}}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2721327414657762" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Test de velocidad de escritura","url":"https://tramites123.com/herramientas/test-velocidad-escritura/","applicationCategory":"EducationalApplication","operatingSystem":"Any","isAccessibleForFree":true,"inLanguage":"es"}</script>
+</head>
+<body>
+<div class="top">Herramienta gratuita · sin registro</div>
+<nav class="nav"><div class="wrap navin"><a class="home" href="/herramientas/">TRÁMITES123</a><a class="tools" href="/herramientas/">Todas las herramientas</a><a class="tools" href="/tools/typing-speed-test/">EN</a></div></nav>
+<main>
+<header class="hero"><div class="wrap"><div class="eyebrow">Práctica y habilidades</div><h1>Test de velocidad de escritura</h1><p>Mide tus palabras por minuto, precisión y errores con varios retos y niveles.</p></div></header>
+<div class="wrap"><section class="typing-shell">
+<div class="controls">
+<div class="control"><label for="duration">Tiempo</label><select id="duration"><option value="30">30 segundos</option><option value="60" selected>1 minuto</option><option value="180">3 minutos</option><option value="300">5 minutos</option></select></div>
+<div class="control"><label for="level">Nivel</label><select id="level"><option value="easy">Fácil</option><option value="medium" selected>Medio</option><option value="hard">Avanzado</option></select></div>
+<div class="control"><label for="category">Reto</label><select id="category"><option value="general">General</option><option value="office">Oficina / trámites</option><option value="numbers">Números y puntuación</option></select></div>
+<div class="control"><label for="language">Idioma del texto</label><select id="language"><option value="es" selected>Español</option><option value="en">English</option></select></div>
+</div>
+<div class="stats"><div class="stat"><strong id="time">1:00</strong><span>TIEMPO</span></div><div class="stat"><strong id="wpm">0</strong><span>WPM</span></div><div class="stat"><strong id="accuracy">100%</strong><span>PRECISIÓN</span></div><div class="stat"><strong id="errors">0</strong><span>ERRORES</span></div><div class="stat"><strong id="chars">0</strong><span>CARACTERES</span></div></div>
+<div class="progress"><div id="progressBar"></div></div>
+<p class="hint">El reloj empieza cuando escribes el primer carácter. Escribe exactamente el texto mostrado.</p>
+<div id="sample" class="sample" aria-label="Texto para copiar"></div>
+<textarea id="typingInput" placeholder="Empieza a escribir aquí..." spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
+<div class="actions"><button class="primary" id="newTest">Nuevo reto</button><button class="secondary" id="restart">Reiniciar</button></div>
+<div id="resultPanel" class="result-panel" aria-live="polite"><h2>Tu resultado</h2><div class="result-grid"><div class="result-box"><strong id="finalWpm">0</strong>WPM bruto</div><div class="result-box"><strong id="finalNet">0</strong>WPM ajustado</div><div class="result-box"><strong id="finalAccuracy">0%</strong>Precisión</div><div class="result-box"><strong id="finalErrors">0</strong>Errores</div></div><p id="grade" class="grade"></p><p id="detail"></p></div>
+</section></div>
+<section class="content-guide"><div class="wrap"><h2>¿Qué mide este test?</h2><p>WPM significa palabras por minuto. El resultado bruto usa el número de caracteres escritos dividido entre cinco. La velocidad ajustada descuenta los errores para dar una medida más útil de velocidad con precisión.</p><h2>Cómo mejorar</h2><p>Empieza con un minuto y nivel medio. Prioriza precisión antes que velocidad. Cuando puedas mantener 95% o más de precisión, prueba el nivel avanzado o los retos con números y puntuación.</p><h2>Retos disponibles</h2><p>Usa General para práctica cotidiana, Oficina / trámites para textos administrativos y Números y puntuación para practicar fechas, cantidades, símbolos y formatos frecuentes.</p></div></section>
+</main>
+<footer class="footer">© 2026 Trámites123 · <a href="/privacy/">Privacidad</a> · <a href="/contact/">Contacto</a></footer>
+<script>
+const passages={
+es:{
+general:{
+easy:["Cada mañana preparo mi lista de tareas y reviso los mensajes importantes. Trabajar con calma me ayuda a terminar cada paso sin olvidar los detalles.","La práctica diaria mejora la velocidad al escribir. Mantén las manos relajadas, mira el texto y trata de cometer pocos errores mientras avanzas."],
+medium:["Completar un formulario correctamente requiere atención. Antes de enviarlo, revisa nombres, fechas, direcciones y números para evitar correcciones innecesarias.","La tecnología facilita muchas tareas cotidianas, pero una buena organización sigue siendo importante. Guardar archivos con nombres claros ayuda a encontrarlos rápidamente."],
+hard:["La productividad sostenible combina velocidad, precisión y criterio. Escribir deprisa sirve de poco si después debemos invertir tiempo corrigiendo datos, puntuación o instrucciones mal interpretadas.","Cuando un documento contiene información compleja, conviene trabajar por etapas: identificar requisitos, reunir evidencia, verificar cifras y realizar una revisión final antes de presentarlo."]
+},
+office:{
+easy:["Por favor revisa el documento, firma en la última página y guarda una copia para tus archivos antes de enviarlo.","La cita está confirmada para mañana. Lleva una identificación válida y llega con tiempo suficiente para registrarte."],
+medium:["Adjunta una copia legible de tu identificación y confirma que el nombre coincida exactamente con el utilizado en la solicitud electrónica.","Antes de presentar la solicitud, verifica que todos los campos obligatorios estén completos y que los documentos adjuntos correspondan al trámite correcto."],
+hard:["La oficina confirmó la recepción del expediente, pero solicitó documentación adicional para completar la revisión. Conserva el número de referencia y responde dentro del plazo indicado.","Para reducir retrasos administrativos, organiza los comprobantes por fecha, utiliza nombres descriptivos para los archivos y confirma que cada documento sea legible antes de cargarlo al portal."]
+},
+numbers:{
+easy:["Cita: 10/15/2026 a las 9:30 AM. Total: $125.50. Referencia: A-2048.","Factura #3187: $84.25 + $5.90 de impuesto = $90.15."],
+medium:["Solicitud #A-58421, recibida el 09/26/2026. Teléfono: (305) 555-0184. Saldo pendiente: $1,248.75.","Presupuesto: $2,500.00; depósito: 25% ($625.00); saldo: $1,875.00. Fecha límite: 10/31/2026."],
+hard:["Caso TR-2026-0917: pago inicial $1,275.45; cuota mensual $348.90 x 24 meses; tasa estimada 6.75%.","Registro: 09/26/2026, 14:35. ID: ZX-4938-11; subtotal $3,786.40 + 7.0% ($265.05) = $4,051.45."]
+}},
+en:{
+general:{
+easy:["Every morning I make a task list and review important messages. Working calmly helps me finish each step without missing the details.","Daily practice improves typing speed. Keep your hands relaxed, watch the text, and try to make as few mistakes as possible."],
+medium:["Completing a form correctly takes attention. Before submitting it, review names, dates, addresses, and numbers to avoid unnecessary corrections.","Technology makes many everyday tasks easier, but good organization still matters. Clear file names make documents easier to find later."],
+hard:["Sustainable productivity combines speed, accuracy, and judgment. Typing quickly has little value if extra time is needed to correct data, punctuation, or misunderstood instructions.","When a document contains complex information, work in stages: identify requirements, gather evidence, verify figures, and complete a final review before submission."]
+},
+office:{
+easy:["Please review the document, sign the last page, and save a copy for your records before sending it.","Your appointment is confirmed for tomorrow. Bring valid identification and arrive early enough to check in."],
+medium:["Attach a clear copy of your identification and confirm that the name matches exactly what you entered on the electronic application.","Before submitting the application, verify that every required field is complete and that each attachment belongs to the correct request."],
+hard:["The office confirmed receipt of the file but requested additional documentation to complete its review. Keep the reference number and respond within the stated deadline.","To reduce administrative delays, organize supporting records by date, use descriptive file names, and confirm that each document is readable before uploading it."]
+},
+numbers:{
+easy:["Appointment: 10/15/2026 at 9:30 AM. Total: $125.50. Reference: A-2048.","Invoice #3187: $84.25 + $5.90 tax = $90.15."],
+medium:["Application #A-58421 received 09/26/2026. Phone: (305) 555-0184. Balance due: $1,248.75.","Estimate: $2,500.00; deposit: 25% ($625.00); balance: $1,875.00. Due date: 10/31/2026."],
+hard:["Case TR-2026-0917: initial payment $1,275.45; monthly payment $348.90 x 24 months; estimated rate 6.75%.","Record: 09/26/2026, 14:35. ID: ZX-4938-11; subtotal $3,786.40 + 7.0% ($265.05) = $4,051.45."]
+}}};
+const $=id=>document.getElementById(id);
+let text="",started=false,finished=false,startTime=null,timer=null,remaining=60,lastPick="";
+function pickText(){const lang=$("language").value,cat=$("category").value,lev=$("level").value,arr=passages[lang][cat][lev];let pick=arr[Math.floor(Math.random()*arr.length)];if(arr.length>1&&pick===lastPick) pick=arr[(arr.indexOf(pick)+1)%arr.length];lastPick=pick;const duration=+$("duration").value;let parts=[];while(parts.join(" ").length<Math.max(260,duration*5.5)) parts.push(pick);text=parts.join(" ");render("");}
+function render(input){let html="";for(let i=0;i<text.length;i++){let c=text[i],cl="";if(i<input.length)cl=input[i]===c?"ok":"bad";else if(i===input.length)cl="current";html+='<span class="'+cl+'">'+escapeHtml(c)+'</span>';} $("sample").innerHTML=html;}
+function escapeHtml(c){return c==="&"?"&amp;":c==="<"?"&lt;":c===">"?"&gt;":c;}
+function metrics(input,elapsed){let correct=0,wrong=0;for(let i=0;i<input.length;i++){if(input[i]===text[i])correct++;else wrong++;}const mins=Math.max(elapsed/60000,1/600);const gross=Math.round((input.length/5)/mins);const net=Math.max(0,Math.round(((input.length-wrong)/5)/mins));const acc=input.length?Math.round(correct/input.length*100):100;return{correct,wrong,gross,net,acc};}
+function update(){const input=$("typingInput").value,m=metrics(input,Date.now()-startTime);$("wpm").textContent=m.gross;$("accuracy").textContent=m.acc+"%";$("errors").textContent=m.wrong;$("chars").textContent=input.length;render(input);}
+function tick(){remaining--;showTime();$("progressBar").style.width=((+$("duration").value-remaining)/(+$("duration").value)*100)+"%";if(remaining<=0)finish();}
+function showTime(){const m=Math.floor(remaining/60),s=remaining%60;$("time").textContent=m+":"+String(s).padStart(2,"0");}
+function start(){if(started)return;started=true;startTime=Date.now();timer=setInterval(tick,1000);}
+function finish(){if(finished)return;finished=true;clearInterval(timer);$("typingInput").disabled=true;const elapsed=Math.min(Date.now()-startTime,+$("duration").value*1000),input=$("typingInput").value,m=metrics(input,elapsed);$("finalWpm").textContent=m.gross;$("finalNet").textContent=m.net;$("finalAccuracy").textContent=m.acc+"%";$("finalErrors").textContent=m.wrong;let grade=m.net>=70&&m.acc>=95?"Excelente":m.net>=50&&m.acc>=93?"Muy buen nivel":m.net>=35&&m.acc>=90?"Buen progreso":"Sigue practicando";$("grade").textContent=grade;$("detail").textContent="Escribiste "+input.length+" caracteres con "+m.correct+" correctos y "+m.wrong+" errores.";$("resultPanel").classList.add("show");$("progressBar").style.width="100%";}
+function reset(newText){clearInterval(timer);started=false;finished=false;startTime=null;remaining=+$("duration").value;$("typingInput").value="";$("typingInput").disabled=false;$("wpm").textContent="0";$("accuracy").textContent="100%";$("errors").textContent="0";$("chars").textContent="0";$("resultPanel").classList.remove("show");$("progressBar").style.width="0";showTime();if(newText)pickText();else render("");$("typingInput").focus();}
+$("typingInput").addEventListener("input",()=>{if(finished)return;if(!started&&$("typingInput").value.length)start();update();if($("typingInput").value.length>=text.length)finish();});
+$("newTest").addEventListener("click",()=>reset(true));$("restart").addEventListener("click",()=>reset(false));
+["duration","level","category","language"].forEach(id=>$(id).addEventListener("change",()=>reset(true)));
+pickText();showTime();
+</script></body></html>
