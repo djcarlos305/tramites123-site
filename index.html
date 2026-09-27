@@ -164,11 +164,11 @@ footer{background:var(--navy2);color:#adc4d4;padding:28px 0;font-size:.78rem}.fo
 </section>
 </main>
 
-<footer><div class="wrap footerin"><span>© 2026 Trámites Aprobado · Miami, Florida · Una iniciativa de Underground Multimedia LLC</span><span><a href="/blog/">Blog</a> · <a href="/ayuda/" data-es="Dónde encontrar ayuda" data-en="Find help">Dónde encontrar ayuda</a> · <a href="/about/">Quiénes somos</a> · <a href="/contact/">Contacto</a> · <a href="/privacy/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/terms/">Términos</a> · <a href="/disclaimer/">Aviso legal</a> · <a href="/mapa-del-sitio/" data-es="Mapa del sitio" data-en="Site map">Mapa del sitio</a></span></div></footer>
+<footer><div class="wrap footerin"><span>© 2026 Trámites Aprobado · Miami, Florida · Una iniciativa de Underground Multimedia LLC</span><span><a href="/blog/">Blog</a> · <a href="/ayuda/" data-es="Dónde encontrar ayuda" data-en="Find help" data-link-es="/ayuda/" data-link-en="/help/">Dónde encontrar ayuda</a> · <a href="/about/">Quiénes somos</a> · <a href="/contact/">Contacto</a> · <a href="/privacy/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/terms/">Términos</a> · <a href="/disclaimer/">Aviso legal</a> · <a href="/mapa-del-sitio/" data-es="Mapa del sitio" data-en="Site map">Mapa del sitio</a></span></div></footer>
 
 <script>
 const lang=document.getElementById('lang');let current='es';
-lang.addEventListener('click',()=>{current=current==='es'?'en':'es';document.documentElement.lang=current;lang.textContent=current==='es'?'EN':'ES';document.querySelectorAll('[data-es]').forEach(el=>{el.innerHTML=el.dataset[current]})});
+lang.addEventListener('click',()=>{current=current==='es'?'en':'es';document.documentElement.lang=current;lang.textContent=current==='es'?'EN':'ES';document.querySelectorAll('[data-es]').forEach(el=>{el.innerHTML=el.dataset[current];if(el.dataset.linkEs)el.href=el.dataset[current==='es'?'linkEs':'linkEn']})});
 document.getElementById('leadForm').addEventListener('submit',e=>{
   e.preventDefault();
   const n=document.getElementById('name').value.trim(),em=document.getElementById('email').value.trim(),p=document.getElementById('phone').value.trim(),need=document.getElementById('need').value,details=document.getElementById('details').value.trim();
