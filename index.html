@@ -145,7 +145,7 @@ footer{background:var(--navy2);color:#adc4d4;padding:28px 0;font-size:.78rem}.fo
 
 <script>
 const lang=document.getElementById('lang');let current='es';
-lang.addEventListener('click',()=>{current=current==='es'?'en':'es';document.documentElement.lang=current;lang.textContent=current==='es'?'EN':'ES';document.querySelectorAll('[data-es]').forEach(el=>{el.innerHTML=el.dataset[current];if(el.dataset.linkEs)el.href=el.dataset[current==='es'?'linkEs':'linkEn']})});
+lang.addEventListener('click',()=>{current=current==='es'?'en':'es';document.documentElement.lang=current;lang.textContent=current==='es'?'EN':'ES';document.querySelectorAll('[data-es]').forEach(el=>{el.innerHTML=el.dataset[current]});document.querySelectorAll('[data-link-es]').forEach(el=>{el.href=el.dataset[current==='es'?'linkEs':'linkEn']})});
 </script>
 </body>
 </html>
